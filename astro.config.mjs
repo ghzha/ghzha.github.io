@@ -9,7 +9,7 @@ export default defineConfig({
 	integrations: [mdx(), sitemap(), tailwind()],
 	markdown: {
 		shikiConfig: {
-			theme: 'light-plus'
+			theme: 'solarized-light'
 		}
 	}
 });

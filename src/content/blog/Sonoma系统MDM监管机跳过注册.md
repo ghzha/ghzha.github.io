@@ -6,22 +6,11 @@ pubDate: 'Mar 17 2024'
 > 该方法出处：bilibili，[MacOS Sonoma MDM监管机跳过注册](https://www.bilibili.com/read/cv27632085/?spm_id_from=333.999.collection.opus.click) 作者：太阳还不困。在此做个备份。
 
 前言 距离上次的教程已经有几个月,sonoma的正式版也已经推送一段时间了.本次就更新一下mdm机器在14系统跳过注册的方法.
-
 之前的版本是12 激活时可以通过断网进桌面 然后使用屏蔽指令实现跳过
-
 有些朋友可能是通过OTA到14 无痛跳过了
-
 但是大版本更新我习惯DFU抹盘重装 本次升级14.1.1后发现 强制需要联网 
-
-
 于是找到了这种使用脚本跳过的方法  步骤相对简单
-
-此也是源自于上贴教程中 海外大神的楼中楼回复 
-
-详见 https://gist.github.com/sghiassy/a3927405cf4ffe81242f4ecb01c382ac?permalink_comment_id=4706379#gistcomment-4706379
-
-
-
+此也是源自于上贴教程中 海外大神的楼中楼回复详见 [Disable Device Enrollment Notification on Mac](https://gist.github.com/sghiassy/a3927405cf4ffe81242f4ecb01c382ac?permalink_comment_id=4706379#gistcomment-4706379)
 
 将Mac关机 然后长按电源键 选择 恢复模式
 

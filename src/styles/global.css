@@ -5,7 +5,7 @@
  */
 
 :root {
-	--accent: grey;
+	--accent: #3b82f6;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
@@ -16,6 +16,7 @@
 		0 16px 32px rgba(var(--gray), 33%);
 }
 
+/* 
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
@@ -30,11 +31,12 @@
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
-}
+} */
 
 
 body {
-	font-family: 'Atkinson', sans-serif;
+	/* font-family: 'Atkinson', sans-serif; */
+	font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -49,7 +51,7 @@ body {
 	line-height: 1.7;
 }
 
-body::before {
+/* body::before {
 	content: "";
 	position: fixed;
 	left: 0;
@@ -85,15 +87,13 @@ body::before {
 		center;
 	background-repeat: no-repeat;
 	z-index: -1;
-	/* 确保伪元素在 body 内部的所有内容之后 */
-}
-
-
+	
+} */
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
 	margin: auto;
-	padding: 3em 1em;
+	padding: 1.5em 1em;
 }
 
 h1,
@@ -102,29 +102,34 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 0.5rem 0;
+	margin: 0.5rem 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+
 }
 
 h1 {
-	font-size: 3.052em;
+	font-size: 2rem;
+	line-height: 2rem;
 }
 
 h2 {
-	font-size: 2.441em;
+	font-size: 1.5em;
+	font-weight: 700;
+	margin-top: 1em;
+	margin-bottom: .5em;
 }
 
 h3 {
-	font-size: 1.953em;
+	font-size: 1.25em;
 }
 
 h4 {
-	font-size: 1.563em;
+	font-size: 1.2em;
 }
 
 h5 {
-	font-size: 1.25em;
+	font-size: 1em;
 }
 
 strong,
@@ -134,10 +139,12 @@ b {
 
 a {
 	color: var(--accent);
+	text-decoration: underline;
+	text-underline-offset: 4px;
 }
 
 a:hover {
-	color: var(--accent);
+	color: #024bbf;
 }
 
 p {
@@ -145,7 +152,7 @@ p {
 }
 
 .prose p {
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 }
 
 textarea {
@@ -171,12 +178,17 @@ code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
+	overflow-x: auto;
 }
 
 pre {
-	padding: 1.5em;
+	padding: 1em;
 	border-radius: 0px !important;
-	/* background-color: #adb4bc !important; */
+	background-color: #f6f8fa !important;
+	margin-left: -1em;
+	margin-right: -1em;
+	margin-bottom: 1.25em;
+	margin-top: 1.25em;
 }
 
 pre>code {
@@ -184,7 +196,7 @@ pre>code {
 }
 
 blockquote {
-	border-left: 4px solid var(--accent);
+	border-left: 5px solid #f87171;
 	padding: 0 0 0 20px;
 	margin: 0px;
 	font-size: 1.333em;

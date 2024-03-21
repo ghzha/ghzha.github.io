@@ -207,13 +207,15 @@ hr {
 	border-top: 1px solid rgb(var(--gray-light));
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
 	body {
 		font-size: 18px;
 	}
 
 	main {
-		padding: 1em;
+		padding: 0em;
+		padding-top: 1em;
+		width: auto;
 	}
 }
 

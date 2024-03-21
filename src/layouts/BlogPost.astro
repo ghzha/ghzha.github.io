@@ -16,7 +16,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<style>
 			main {
 				width: calc(100% - 2em);
-				max-width: 100%;
 				min-height: calc(100vh - 109px);
 				margin: auto;
 			}
@@ -34,9 +33,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				width: 54rem;
 				max-width: calc(100% - 2em);
 				margin: auto;
-				padding: 0.5em 1em;
 				color: rgb(var(--gray-dark));
-				border: 1px solid rgb(234, 234, 234);
 				border-radius: 8px;
 				font-size: 1rem;
 			}
@@ -61,12 +58,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 	<body>
 		<Header />
-		<main>
+		<main class="max-w-full">
 			<article>
 				<!-- <div class="hero-image">
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 				</div> -->
-				<div class="prose">
+				<div class="prose md:border border-gray-300 md:px-4 md:py-2">
 					<div class="title">
 						<h1>{title}</h1>
 						<div class="date">

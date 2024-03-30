@@ -2,8 +2,13 @@
 title: 'MacOS Sonoma MDM监管机跳过注册'
 description: 'MacOS Sonoma MDM监管机跳过注册方法'
 pubDate: 'Mar 17 2024'
+tags:
+  - programming
+  - web development
+  - tutorials
+  - JavaScript
 ---
-> 该方法出处：bilibili，[MacOS Sonoma MDM监管机跳过注册](https://www.bilibili.com/read/cv27632085/?spm_id_from=333.999.collection.opus.click) 作者：太阳还不困。在此做个备份。
+> 文章来源：[MacOS Sonoma MDM监管机跳过注册](https://www.bilibili.com/read/cv27632085/?spm_id_from=333.999.collection.opus.click)
 
 前言 距离上次的教程已经有几个月,sonoma的正式版也已经推送一段时间了.本次就更新一下mdm机器在14系统跳过注册的方法.
 之前的版本是12 激活时可以通过断网进桌面 然后使用屏蔽指令实现跳过
@@ -15,7 +20,7 @@ pubDate: 'Mar 17 2024'
 将Mac关机 然后长按电源键 选择 恢复模式
 
 
-选择沙发浏览器 打开地址 skipmdm.com
+选择沙发浏览器 打开地址 [skipmdm.com](skipmdm.com)
 
 
 翻到中间 点击网页中的 Copy AutoByPass (即复制指令到粘贴板

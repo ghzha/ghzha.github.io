@@ -90,10 +90,10 @@ body {
 	
 } */
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	/* width: 720px; */
+	/* max-width: calc(100% - 2em); */
 	margin: auto;
-	padding: 1.5em 1em;
+	/* padding: 1.5em 1em; */
 }
 
 h1,
@@ -153,6 +153,17 @@ p {
 
 .prose p {
 	margin-bottom: 1em;
+}
+
+.prose a {
+	color: black;
+	font-weight: bold;
+	text-decoration: underline;
+	text-decoration-style: dashed;
+}
+
+.prose a:hover {
+	color: var(--accent);
 }
 
 textarea {

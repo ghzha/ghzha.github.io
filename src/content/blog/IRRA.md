@@ -2,7 +2,11 @@
 title: 'IRRA论文笔记'
 description: ''
 pubDate: 'Mar 18 2024'
-tags: ["深度学习"]
+tags:
+  - programming
+  - web development
+  - tutorials
+  - JavaScript
 ---
 这周阅读论文《Cross-Modal Implicit Relation Reasoning and Aligning for Text-to-Image Person Retrieval》
 

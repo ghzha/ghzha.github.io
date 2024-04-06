@@ -4,7 +4,7 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header
-	class="md:px-16 backdrop-blur-md px-4 relative bg-white md:bg-transparent"
+	class="md:px-16 z-10 backdrop-blur-md px-4 relative bg-white md:bg-transparent"
 >
 	<nav
 		class="container min-h-20 max-w-3xl mx-auto flex justify-between items-center border-b border-gray-300"
@@ -21,7 +21,7 @@ import { SITE_TITLE } from "../consts";
 		<!-- 响应式菜单 -->
 		<div
 			id="responsive-menu"
-			class="md:hidden z-20 hidden absolute top-16 right-0 w-full flex flex-col items-center gap-4 p-4"
+			class="md:hidden z-20 hidden absolute top-16 right-0 w-full flex flex-col items-center gap-4 p-4 bg-white"
 		>
 			<HeaderLink href="/">首页</HeaderLink>
 			<HeaderLink href="/blog">博客</HeaderLink>
@@ -82,10 +82,6 @@ import { SITE_TITLE } from "../consts";
 		padding: 0.5rem 0.5rem;
 		color: var(--black);
 		text-decoration: none;
-	}
-	#responsive-menu {
-		/* backdrop-filter: blur(5px); */
-		background-color: white;
 	}
 </style>
 

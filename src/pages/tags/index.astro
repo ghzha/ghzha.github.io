@@ -7,11 +7,16 @@ const pageTitle = "Tag Index";
 ---
 
 <BaseLayout>
-    <ul>
+    <ul class="w-2/3 flex gap-4 flex-wrap">
         {
             tags.map((tag) => (
-                <li>
-                    <a href={`/tags/${tag}`}>{tag}</a>
+                <li class="list-none underline decoration-wavy p-2">
+                    <a
+                        href={`/tags/${tag}`}
+                        class="block no-underline text-xl text-zinc-900 py-2"
+                    >
+                        {`#${tag}`}
+                    </a>
                 </li>
             ))
         }

@@ -2,6 +2,11 @@
 title: 'Java学习笔记'
 description: 'MacOS Sonoma MDM监管机跳过注册方法'
 pubDate: 'Mar 17 2024'
+tags:
+  - programming
+  - web development
+  - tutorials
+  - JavaScript
 ---
 ## 概述
 

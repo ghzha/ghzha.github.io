@@ -24,14 +24,13 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout>
-    <div>Posts tagged with {tag}</div>
-    <ul class="block">
+    <ul class="flex-col items-center justify-center flex-1 flex-nowrap">
         {
             posts.map((post) => (
-                <li>
+                <li class="p-2">
                     <a
                         href={`/blog/${post.slug}/`}
-                        class="inline-block text-2xl font-bold hover:text-red-500"
+                        class="inline-block text-2xl text-black decoration-wavy"
                     >
                         {post.data.title}
                     </a>

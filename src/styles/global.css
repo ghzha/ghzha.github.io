@@ -186,7 +186,7 @@ img {
 }
 
 code {
-	padding: 1px 5px;
+	padding: 1px 3px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
 	overflow-x: auto;
@@ -194,7 +194,8 @@ code {
 
 pre {
 	padding: 1em;
-	border-radius: 0px !important;
+	border: 1px solid rgb(var(--gray-light));
+	border-radius: 4px;
 	background-color: #f6f8fa !important;
 	margin-left: -1em;
 	margin-right: -1em;
@@ -206,11 +207,39 @@ pre>code {
 	all: unset;
 }
 
+code,
+kbd,
+samp,
+pre {
+	font-size: 0.9em;
+
+}
+
 blockquote {
-	border-left: 5px solid #f87171;
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
+	/* border-left: 5px solid #f87171; */
+	padding: 0.5rem 0.5rem;
+	margin-bottom: 1rem;
+	font-size: 1em;
+	display: flex;
+	align-items: center;
+
+	border: 1px solid #B7F2F2;
+	min-height: 4rem !important;
+	border-radius: 4px;
+	/* background-color: #ECFEFF; */
+	background: linear-gradient(#ECFEFF, #F5FFFF);
+	color: #0A95A5;
+}
+
+blockquote p {
+	margin: 0 !important;
+
+
+}
+
+blockquote a {
+	color: #0B7590 !important;
+	text-decoration: none !important;
 }
 
 hr {

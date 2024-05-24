@@ -1,29 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeComponent from "../components/TimeComponent";
 
 const posts = await getCollection("blog");
 ---
 
 <BaseLayout>
-	<ul class="w-full">
-		{
-			posts.map((post) => (
-				<li class="w-full p-4 flex justify-center items-start relative mb-2">
-					<div class="">
-						<a
-							href={`/blog/${post.slug}/`}
-							class=" text-black inline-block text-2xl no-underline"
-						>
-							{post.data.title}
-						</a>
-
-						<p class="text-sm text-gray-400">
-							{post.data.pubDate.toLocaleDateString("zh-CN")}
-						</p>
-					</div>
-				</li>
-			))
-		}
-	</ul>
+	<div class="flex-col">
+		<TimeComponent client:load />
+	</div>
 </BaseLayout>

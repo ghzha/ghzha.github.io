@@ -21,7 +21,7 @@ import { SITE_TITLE } from "../consts";
 		<!-- 响应式菜单 -->
 		<div
 			id="responsive-menu"
-			class="md:hidden z-20 hidden absolute top-16 right-0 w-full flex flex-col items-center gap-4 p-4 bg-white"
+			class="md:hidden z-20 absolute top-16 right-0 w-full flex flex-col items-center gap-4 p-4 bg-white"
 		>
 			<HeaderLink href="/">首页</HeaderLink>
 			<HeaderLink href="/blog">博客</HeaderLink>
@@ -67,7 +67,6 @@ import { SITE_TITLE } from "../consts";
 	}
 	h2 {
 		margin: 0;
-		/* font-size: 1.5em; */
 	}
 
 	h2 a,
@@ -87,6 +86,7 @@ import { SITE_TITLE } from "../consts";
 	const responsiveMenu = document.getElementById("responsive-menu");
 
 	if (menuToggle && responsiveMenu) {
+		responsiveMenu.classList.add("hidden");
 		menuToggle.addEventListener("click", () => {
 			responsiveMenu.classList.toggle("hidden");
 		});

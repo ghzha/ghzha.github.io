@@ -1,94 +1,102 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 
 const TimeComponent = () => {
-  // const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentDateTime(new Date());
-  //   }, 1000); // Update every second
-
-  //   return () => clearInterval(interval); // Cleanup function
-  // }, []);
-
-  // // Calculate progress
-  // const startOfYear: Date = new Date(currentDateTime.getFullYear(), 0, 0);
-  // const diff: number = currentDateTime.getTime() - startOfYear.getTime();
-  // const oneDay: number = 1000 * 60 * 60 * 24;
-  // const dayOfYear: number = Math.floor(diff / oneDay);
-
-  // // Calculate progress for today
-  // const startOfDay: Date = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), currentDateTime.getDate());
-  // const diffToday: number = currentDateTime.getTime() - startOfDay.getTime();
-  // const percentOfDay: number = (diffToday / oneDay) * 100;
-
-  // // Additional calculations
-  // const daysOfWeek = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-  // const dayOfWeek = daysOfWeek[currentDateTime.getDay()];
-  // const daysPassedThisWeek = currentDateTime.getDay();
-  // const daysInCurrentMonth = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth() + 1, 0).getDate();
-  // const daysPassedThisMonth = currentDateTime.getDate();
-
-  // // Calculate progress for the week
-  // const percentOfWeek = (daysPassedThisWeek / 7) * 100;
-
-  // // Calculate progress for the month
-  // const percentOfMonth = (daysPassedThisMonth / daysInCurrentMonth) * 100;
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
-  const [dayOfYear, setDayOfYear] = useState(0);
-  const [percentOfDay, setPercentOfDay] = useState(0);
-  const [percentOfWeek, setPercentOfWeek] = useState(0);
-  const [percentOfMonth, setPercentOfMonth] = useState(0);
 
   const daysOfWeek = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-  const daysInCurrentMonth = useRef(new Date(currentDateTime.getFullYear(), currentDateTime.getMonth() + 1, 0).getDate());
+
+  const daysInCurrentMonth = useMemo(() => {
+    return new Date(currentDateTime.getFullYear(), currentDateTime.getMonth() + 1, 0).getDate();
+  }, [currentDateTime.getDay()]);
+
+
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const card = cardRef.current!;
+
+    card.addEventListener('mousemove', handleMouseMove);
+    function handleMouseMove(event: MouseEvent) {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+      const cardCenterY = cardRect.top + cardRect.height / 2;
+
+      const mouseX = event.clientX - cardCenterX;
+      const mouseY = event.clientY - cardCenterY;
+
+
+      const maxRotation = 30; // 最大旋转角度
+
+      const rotateX = (-mouseY / cardRect.height) * maxRotation;
+      const rotateY = (mouseX / cardRect.width) * maxRotation;
+
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    }
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'none';
+    });
+
+
+
     const interval = setInterval(() => {
-      const now = new Date();
-      setCurrentDateTime(now);
+      setCurrentDateTime(new Date());
+    }, 1000);
 
-      // Calculate progress for the year
-      const startOfYear = new Date(now.getFullYear(), 0, 0);
-      const diff = now.getTime() - startOfYear.getTime();
-      const oneDay = 1000 * 60 * 60 * 24;
-      setDayOfYear(Math.floor(diff / oneDay));
-
-      // Calculate progress for today
-      const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const diffToday = now.getTime() - startOfDay.getTime();
-      setPercentOfDay((diffToday / oneDay) * 100);
-
-      // Calculate progress for the week
-      const daysPassedThisWeek = now.getDay();
-      setPercentOfWeek((daysPassedThisWeek / 7) * 100);
-
-      // Calculate progress for the month
-      const daysPassedThisMonth = now.getDate();
-      setPercentOfMonth((daysPassedThisMonth / daysInCurrentMonth.current) * 100);
-    }, 1000); // Update every second
-
-    return () => clearInterval(interval); // Cleanup function
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
-  const dayOfWeek = daysOfWeek[currentDateTime.getDay()];
-  const daysPassedThisWeek = currentDateTime.getDay();
-  const daysPassedThisMonth = currentDateTime.getDate();
+  const [percentOfDay, percentOfWeek] = useMemo(() => {
+    const now = currentDateTime;
+    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const diffToday = now.getTime() - startOfDay.getTime();
+    const oneDay = 1000 * 60 * 60 * 24;
+    const percentOfDay = (diffToday / oneDay) * 100;
+    const daysPassedThisWeek = now.getDay() === 0 ? 7 : now.getDay();
+    const percentOfWeek = ((daysPassedThisWeek - 1 + percentOfDay / 100) / 7) * 100;
+    return [percentOfDay, percentOfWeek];
+  }, [currentDateTime]);
+
+
+  const [daysPassedThisWeek, dayOfWeek] = useMemo(() => {
+    const now = currentDateTime;
+    const daysPassedThisWeek = now.getDay() === 0 ? 7 : now.getDay();
+    const dayOfWeek = daysOfWeek[currentDateTime.getDay()];
+    return [daysPassedThisWeek, dayOfWeek];
+  }, [currentDateTime.getDay()]);
+
+  const [percentOfMonth, daysPassedThisMonth] = useMemo(() => {
+    const daysPassedThisMonth = currentDateTime.getDate();
+    return [(daysPassedThisMonth / daysInCurrentMonth) * 100, daysPassedThisMonth];
+  }, [currentDateTime.getDay()]);
+
+
+  const dayOfYear = useMemo(() => {
+    const now = currentDateTime;
+    const startOfYear = new Date(now.getFullYear(), 0, 0);
+    const diff = now.getTime() - startOfYear.getTime();
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+  }, [currentDateTime.getDay()]);
+
+
 
 
   return (
     <div className='w-full flex justify-center'>
-      <div className="flex w-4/5 sm:h-64 flex-col sm:flex-row items-center justify-around border p-4 rounded-lg cursor-pointer select-none">
+      <div ref={cardRef} className="flex w-4/5 sm:h-64 flex-col sm:flex-row items-center justify-around border p-4 rounded-lg cursor-pointer select-none shadow-md transition-transform ease-in-out duration-0">
         <div className="flex w-1/4 flex-col justify-center items-center">
-          <div className="text-4xl mb-4">{currentDateTime.toLocaleTimeString()}</div>
-          <div className="text-xl mb-4 text-gray-500">{currentDateTime.toLocaleDateString()}</div>
+          <div className="text-4xl mb-4">{currentDateTime.toLocaleTimeString('zh-CN')}</div>
+          <div className="text-xl mb-4 text-gray-500">{currentDateTime.toLocaleDateString('zh-CN')}</div>
           <div className="mt-2 text-lg text-gray-700 font-bold">
             {dayOfWeek}
           </div>
         </div>
 
         <div className="w-px bg-gray-300 h-full overflow-visible"></div>
-
         <div className="flex flex-col justify-center items-center">
           <div className="w-64 bg-green-100 rounded-full mt-4 overflow-hidden">
             <div className="h-2 bg-green-500" style={{ width: `${percentOfDay}%` }}></div>
@@ -110,7 +118,6 @@ const TimeComponent = () => {
           <div className="mt-2 text-sm text-orange-800 font-bold">
             本月的第 {daysPassedThisMonth} 天 ({percentOfMonth.toFixed(2)}%)
           </div>
-
 
           <div className="w-64 bg-blue-100 rounded-full overflow-hidden mt-4">
             <div className="h-2 bg-blue-500" style={{ width: `${(dayOfYear / 365) * 100}%` }}></div>

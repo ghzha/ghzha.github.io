@@ -4,24 +4,46 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header
-	class="md:px-16 z-10 backdrop-blur-md px-4 relative bg-white md:bg-transparent"
+	class="md:px-8 z-10 backdrop-blur-md px-4 relative bg-white md:bg-transparent"
+	transition:persist
 >
 	<nav
-		class="container min-h-16 max-w-3xl mx-auto flex justify-between items-center border-b border-gray-300"
+		class="container min-h-20 max-w-full mx-auto flex justify-between items-center"
 	>
-		<div class="hidden md:flex md:flex-row md:items-center md:gap-6">
-			<h2 class="text-2xl"><a href="/">{SITE_TITLE}</a></h2>
-			<div class="internal-links flex flex-row items-center gap-5">
-				<HeaderLink href="/">首页</HeaderLink>
-				<HeaderLink href="/blog">博客</HeaderLink>
-				<HeaderLink href="/tags">标签</HeaderLink>
-				<HeaderLink href="/about">关于</HeaderLink>
+		<h2 class="text-2xl w-1/4 hidden md:block">
+			<a href="/">{SITE_TITLE}</a>
+		</h2>
+		<div
+			class="hidden md:flex md:flex-row md:items-center md:gap-6 px-4 rounded-3xl border border-gray-300 shadow-md"
+			id="tab-container"
+		>
+			<div
+				class="internal-links flex flex-row items-center gap-5 relative"
+			>
+				<div class="relative tab">
+					<a href="/" class="block">首页</a>
+				</div>
+				<div class="tab">
+					<a href="/blog" class="block">博客</a>
+				</div>
+				<div class="tab">
+					<a href="/tags" class="block">标签</a>
+				</div>
+				<div class="tab">
+					<a href="/about" class="block">关于</a>
+				</div>
+
+				<div
+					class="absolute bottom-0 h-1 bg-lime-600 opacity-80 transition-transform"
+					id="indicator"
+				>
+				</div>
 			</div>
 		</div>
 		<!-- 响应式菜单 -->
 		<div
 			id="responsive-menu"
-			class="md:hidden z-20 absolute top-16 right-0 w-full flex flex-col items-center gap-4 p-4 bg-white"
+			class="md:hidden z-20 absolute top-16 right-0 flex flex-col items-center gap-4 bg-white p-2 transition-transform"
 		>
 			<HeaderLink href="/">首页</HeaderLink>
 			<HeaderLink href="/blog">博客</HeaderLink>
@@ -29,7 +51,7 @@ import { SITE_TITLE } from "../consts";
 			<HeaderLink href="/about">关于</HeaderLink>
 		</div>
 
-		<div class="hidden md:flex">
+		<div class="hidden md:flex w-1/4 justify-end">
 			<a href="https://github.com/ghzha" target="_blank" class="flex">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -91,4 +113,33 @@ import { SITE_TITLE } from "../consts";
 			responsiveMenu.classList.toggle("hidden");
 		});
 	}
+
+	const tabs = document.querySelectorAll<HTMLDivElement>(".tab");
+	const indicator = document.getElementById("indicator");
+	tabs.forEach((tab) => {
+		tab.addEventListener("click", (e) => {
+			if (indicator && e.target) {
+				indicator.style.width = `${tab.offsetWidth}px`;
+				indicator.style.transform = `translateX(${tab.offsetLeft}px)`;
+			}
+
+			// tabs.forEach((tab) => tab.classList.remove("active"));
+			// tab.classList.add("active");
+		});
+	});
+	const activeTab = tabs[0];
+	if (indicator && activeTab) {
+		indicator.style.width = `${activeTab.offsetWidth}px`;
+		indicator.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+	}
+
+	const tabContainer = document.getElementById("tab-container");
+	tabContainer?.addEventListener("mousemove", (e) => {
+		const rect = tabContainer.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const y = e.clientY - rect.top;
+		// background: linear-gradient(to right, lch(66% 0.19 249 / 0) 0%, lch(66% 0.19 249 / 0.7) 50%, lch(66% 0.19 249 / 0) 100%);
+		// radial-gradient(95.54894033949304px circle at 0px 0px, hsla(80,89%,89%,.6) 0%, transparent 65%)
+		tabContainer.style.background = `radial-gradient(95.54894033949304px circle at ${x}px ${y}px, hsla(80,89%,89%,.6) 0%, transparent 65%)`;
+	});
 </script>

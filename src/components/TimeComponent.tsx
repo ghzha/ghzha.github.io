@@ -28,8 +28,11 @@ const TimeComponent = () => {
 
       const maxRotation = 30; // 最大旋转角度
 
-      const rotateX = (-mouseY / cardRect.height) * maxRotation;
-      const rotateY = (mouseX / cardRect.width) * maxRotation;
+      const rotateX = (-mouseX / cardRect.width) * maxRotation * 1.5;
+      const rotateY = (-mouseY / cardRect.height) * maxRotation * 1.5;
+
+
+
 
       card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     }

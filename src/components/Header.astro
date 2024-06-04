@@ -1,15 +1,28 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+
+import type { HTMLAttributes } from "astro/types";
+
+// type Props = HTMLAttributes<"a">;
+
+// const { href, class: className, ...props } = Astro.props;
+
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
+
+const isActive = (href: string) => {
+	return href === pathname || href === "/" + subpath?.[0];
+};
+
+// = href === pathname || href === "/" + subpath?.[0];
 ---
 
 <header
-	class="md:px-8 z-10 backdrop-blur-md px-4 relative bg-white md:bg-transparent"
+	class="md:px-8 z-10 backdrop-blur-md px-4 py-2 relative bg-white md:bg-transparent"
 	transition:persist
 >
-	<nav
-		class="container min-h-20 max-w-full mx-auto flex justify-between items-center"
-	>
+	<nav class="container max-w-full mx-auto flex justify-between items-center">
 		<h2 class="text-2xl w-1/4 hidden md:block">
 			<a href="/">{SITE_TITLE}</a>
 		</h2>
@@ -20,21 +33,21 @@ import { SITE_TITLE } from "../consts";
 			<div
 				class="internal-links flex flex-row items-center gap-5 relative"
 			>
-				<div class="relative tab">
+				<div class:list={["tab", { active: isActive("/") }]}>
 					<a href="/" class="block">首页</a>
 				</div>
-				<div class="tab">
+				<div class:list={["tab", { active: isActive("/blog") }]}>
 					<a href="/blog" class="block">博客</a>
 				</div>
-				<div class="tab">
+				<div class:list={["tab", { active: isActive("/tags") }]}>
 					<a href="/tags" class="block">标签</a>
 				</div>
-				<div class="tab">
+				<div class:list={["tab", { active: isActive("/about") }]}>
 					<a href="/about" class="block">关于</a>
 				</div>
 
 				<div
-					class="absolute bottom-0 h-1 bg-lime-600 opacity-80 transition-transform"
+					class="absolute bottom-0 h-1 bg-lime-600/70 opacity-80 transition-transform ease-out duration-300"
 					id="indicator"
 				>
 				</div>
@@ -85,7 +98,6 @@ import { SITE_TITLE } from "../consts";
 		width: 100%;
 		top: 0;
 		position: sticky;
-		min-height: 4rem;
 	}
 	h2 {
 		margin: 0;
@@ -116,20 +128,24 @@ import { SITE_TITLE } from "../consts";
 
 	const tabs = document.querySelectorAll<HTMLDivElement>(".tab");
 	const indicator = document.getElementById("indicator");
+	let activeTab = tabs[0];
 	tabs.forEach((tab) => {
+		if (tab.classList.contains("active")) {
+			activeTab = tab;
+		}
 		tab.addEventListener("click", (e) => {
 			if (indicator && e.target) {
 				indicator.style.width = `${tab.offsetWidth}px`;
 				indicator.style.transform = `translateX(${tab.offsetLeft}px)`;
 			}
-
-			// tabs.forEach((tab) => tab.classList.remove("active"));
-			// tab.classList.add("active");
+			tabs.forEach((tab) => tab.classList.remove("active"));
+			tab.classList.add("active");
 		});
 	});
-	const activeTab = tabs[0];
+
 	if (indicator && activeTab) {
 		indicator.style.width = `${activeTab.offsetWidth}px`;
+		// indicator.style.left = `${activeTab.offsetLeft}px`;
 		indicator.style.transform = `translateX(${activeTab.offsetLeft}px)`;
 	}
 
@@ -141,5 +157,8 @@ import { SITE_TITLE } from "../consts";
 		// background: linear-gradient(to right, lch(66% 0.19 249 / 0) 0%, lch(66% 0.19 249 / 0.7) 50%, lch(66% 0.19 249 / 0) 100%);
 		// radial-gradient(95.54894033949304px circle at 0px 0px, hsla(80,89%,89%,.6) 0%, transparent 65%)
 		tabContainer.style.background = `radial-gradient(95.54894033949304px circle at ${x}px ${y}px, hsla(80,89%,89%,.6) 0%, transparent 65%)`;
+	});
+	tabContainer?.addEventListener("mouseleave", () => {
+		tabContainer.style.background = "none";
 	});
 </script>

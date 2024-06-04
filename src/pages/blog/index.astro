@@ -3,22 +3,32 @@ import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 const posts = (await getCollection("blog")).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const formatDate = (date: Date) => {
+	const day = date.getDate();
+	const month = date.getMonth() + 1; // 月份加 1
+	const year = date.getFullYear();
+	return `${month}/${day}/${year}`;
+};
 ---
 
 <BaseLayout>
-	<section>
-		<ul class="flex flex-wrap gap-2 list-none m-0 p-0">
+	<section class="text-zinc-900">
+		<ul
+			class="timeline pl-10 relative flex flex-wrap gap-2 list-none m-0 p-0 top-4"
+		>
 			{
 				posts.map((post) => (
-					<li class="w-full">
+					<li class="relative w-full flex justify-between">
 						<a
 							href={`/blog/${post.slug}/`}
 							class="block no-underline"
 						>
-							<h3 class="title text-xl">{post.data.title}</h3>
+							{post.data.title}
 						</a>
+						<time>{formatDate(post.data.pubDate)}</time>
 					</li>
 				))
 			}
@@ -29,8 +39,33 @@ const posts = (await getCollection("blog")).sort(
 		ul li a:hover .date {
 			color: rgb(var(--accent));
 		}
+		li a {
+			color: rgb(var(--gray-dark));
+		}
 		ul a:hover img {
 			box-shadow: var(--box-shadow);
+		}
+
+		.timeline::before {
+			content: "";
+			position: absolute;
+			top: 10px;
+			bottom: 10px;
+			left: 8px; /* Center the line with respect to the circles */
+			width: 1px;
+			background-color: #aacc84;
+		}
+
+		.timeline > li::after {
+			content: "";
+			position: absolute;
+			left: -35px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 8px;
+			height: 8px;
+			background-color: #aacc84;
+			border-radius: 50%;
 		}
 		@media (max-width: 720px) {
 			ul {

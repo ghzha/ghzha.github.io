@@ -1,7 +1,7 @@
 ---
 title: 'Python函数的参数类型'
 description: ''
-pubDate: 'July 3 2024'
+pubDate: '2024-6-3'
 tags:
   - programming
   - Python
@@ -38,8 +38,8 @@ Python 函数的参数类型主要有以下几种：
 
 4. **可变长度参数（Variable-length Arguments）**：
    - 用于接收任意数量的参数，有两种形式：
-     - *args（可变位置参数）：接收任意数量的位置参数，并将其作为元组传递给函数。
-     - **kwargs（可变关键字参数）：接收任意数量的关键字参数，并将其作为字典传递给函数。
+     - `*args`（可变位置参数）：接收任意数量的位置参数，并将其作为元组传递给函数。
+     - `**kwargs`（可变关键字参数）：接收任意数量的关键字参数，并将其作为字典传递给函数。
    ```python
    def func(*args):
        return sum(args)

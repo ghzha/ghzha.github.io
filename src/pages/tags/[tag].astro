@@ -6,7 +6,6 @@ export async function getStaticPaths() {
     const uniqueTags = [
         ...new Set(allPosts.map((post) => post.data.tags || []).flat()),
     ];
-    console.log(uniqueTags);
 
     return uniqueTags.map((tag) => {
         const filteredPosts = allPosts.filter((post) =>
@@ -24,18 +23,27 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout>
-    <ul class="flex-col items-center justify-center flex-1 flex-nowrap">
-        {
-            posts.map((post) => (
-                <li class="p-2">
-                    <a
-                        href={`/blog/${post.slug}/`}
-                        class="inline-block text-2xl text-black decoration-wavy"
-                    >
-                        {post.data.title}
-                    </a>
-                </li>
-            ))
-        }
-    </ul>
+    <div class="w-full flex flex-col">
+        <div>
+            <h1 class="font-bold">{tag.toUpperCase()}</h1>
+        </div>
+        <hr />
+
+        <ul
+            class="flex-col items-center justify-center flex-1 flex-nowrap mt-4 px-4"
+        >
+            {
+                posts.map((post) => (
+                    <li class="p-2">
+                        <a
+                            href={`/blog/${post.slug}/`}
+                            class="inline-block text-black decoration-wavy"
+                        >
+                            {post.data.title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
 </BaseLayout>

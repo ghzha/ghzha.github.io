@@ -17,7 +17,7 @@
 }
 
 body {
-	font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+	font-family: var(--font-sans), system-ui, -apple-system, PingFang SC, microsoft yahei, Segoe UI, Roboto, Helvetica, noto sans sc, hiragino sans gb, "sans-serif", Apple Color Emoji, Segoe UI Emoji, Not Color Emoji;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -97,8 +97,6 @@ p {
 	color: palevioletred;
 	font-weight: bold;
 
-	/* text-decoration: underline; */
-	/* text-decoration-style: dashed; */
 }
 
 .prose a:hover {
@@ -136,8 +134,7 @@ pre {
 	border: 1px solid rgb(var(--gray-light));
 	border-radius: 4px;
 	background-color: #f6f8fa !important;
-	/* margin-left: -1em; */
-	/* margin-right: -1em; */
+
 	margin-bottom: 1.25em;
 	margin-top: 1.25em;
 }

@@ -26,7 +26,7 @@ const TimeComponent = () => {
       const mouseY = event.clientY - cardCenterY;
 
 
-      const maxRotation = 30; // 最大旋转角度
+      const maxRotation = 5; // 最大旋转角度
 
       const rotateX = (-mouseX / cardRect.width) * maxRotation * 1.5;
       const rotateY = (-mouseY / cardRect.height) * maxRotation * 1.5;

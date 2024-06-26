@@ -122,33 +122,47 @@ img {
 	border-radius: 8px;
 }
 
+
+pre {
+	padding: 1em;
+	border: 1px solid rgb(var(--gray-light));
+	border-radius: .625rem;
+	background-color: #f6f8fa !important;
+	margin-bottom: 1.25em;
+	margin-top: 1.25em;
+
+}
+
 code {
 	padding: 1px 3px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
 	overflow-x: auto;
-}
 
-pre {
-	padding: 1em;
-	border: 1px solid rgb(var(--gray-light));
-	border-radius: 4px;
-	background-color: #f6f8fa !important;
-
-	margin-bottom: 1.25em;
-	margin-top: 1.25em;
-}
-
-pre>code {
+	font-family: "Fira Code", monospace !important;
 	all: unset;
+	counter-reset: line;
+
 }
+
+
+code .line:not(:last-child):before {
+	counter-increment: line;
+	content: counter(line);
+	display: inline-block;
+	width: 1em;
+	margin-right: 1em;
+	text-align: right;
+	color: #888;
+}
+
+
 
 code,
 kbd,
 samp,
 pre {
 	font-size: 0.9em;
-
 }
 
 blockquote {
@@ -211,4 +225,19 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+.copy-code {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.25rem 0.5rem;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	border-radius: 4px;
+	color: #888;
+}
+
+.copy-code:hover {
+	background-color: #ccc;
 }

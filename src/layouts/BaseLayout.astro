@@ -12,17 +12,6 @@ console.log("CursorSpecialEffects");
 <html lang="zh">
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-        <!-- <script data-astro-rerun>
-            import CursorSpecialEffects from "../utils/firework";
-            console.log("he");
-        </script> -->
-        <!-- <script data-astro-rerun>
-            // import CursorSpecialEffects from "../utils/firework";
-            const cursorSpecialEffects = new CursorSpecialEffects();
-            cursorSpecialEffects.init();
-            console.log("CursorSpecialEffects");
-        </script> -->
-
         <ViewTransitions />
         <style>
             #animation {
@@ -481,19 +470,14 @@ console.log("CursorSpecialEffects");
         </div>
         <Footer />
 
-        <!-- <script is:inline data-astro-rerun>
-            // const CursorSpecialEffects = require("../utils/firework");
-            import CursorSpecialEffects from "../utils/firework";
+        <script>
+            import CursorSpecialEffects from "../utils/firework.ts";
 
-            document.addEventListener(
-                "astro:page-load",
-                () => {
-                    const cursorSpecialEffects = new CursorSpecialEffects();
-                    cursorSpecialEffects.init();
-                    console.log("CursorSpecialEffects init");
-                },
-                { once: true },
-            );
-        </script> -->
+            document.addEventListener("astro:page-load", () => {
+                const cursorSpecialEffects = new CursorSpecialEffects();
+                cursorSpecialEffects.init();
+                console.log("CursorSpecialEffects init");
+            });
+        </script>
     </body>
 </html>

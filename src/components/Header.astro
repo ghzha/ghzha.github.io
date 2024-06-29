@@ -22,32 +22,67 @@ const isActive = (href: string) => {
 	class="md:px-8 z-10 backdrop-blur-md px-4 md:py-2 py-4 relative bg-white md:bg-transparent"
 	transition:persist
 >
-	<nav class="container max-w-full mx-auto flex justify-between items-center">
+	<nav
+		class="container max-w-full mx-auto flex justify-between items-center font-medium text-base"
+	>
 		<h2 class="text-2xl w-1/4 hidden md:block">
 			<a href="/">{SITE_TITLE}</a>
 		</h2>
 		<div
-			class="hidden md:flex md:flex-row md:items-center md:gap-6 px-4 rounded-3xl border border-gray-300 shadow-md"
+			class="hidden md:flex px-8 md:flex-row md:items-center md:gap-6 rounded-3xl border border-gray-300/50 shadow-md"
 			id="tab-container"
 		>
 			<div
-				class="internal-links flex flex-row items-center gap-5 relative"
+				class="internal-links flex flex-row items-center gap-4 relative"
 			>
-				<div class:list={["tab", { active: isActive("/") }]}>
+				<div
+					class:list={[
+						"tab",
+						"px-1",
+						{
+							active: isActive("/"),
+							"text-teal-500": isActive("/"),
+						},
+					]}
+				>
 					<a href="/" class="block">首页</a>
 				</div>
-				<div class:list={["tab", { active: isActive("/blog") }]}>
+				<div
+					class:list={[
+						"tab",
+						{
+							active: isActive("/blog"),
+							"text-teal-500": isActive("/blog"),
+						},
+					]}
+				>
 					<a href="/blog" class="block">博客</a>
 				</div>
-				<div class:list={["tab", { active: isActive("/tags") }]}>
+				<div
+					class:list={[
+						"tab",
+						{
+							active: isActive("/tags"),
+							"text-teal-500": isActive("/tags"),
+						},
+					]}
+				>
 					<a href="/tags" class="block">标签</a>
 				</div>
-				<div class:list={["tab", { active: isActive("/about") }]}>
+				<div
+					class:list={[
+						"tab",
+						{
+							active: isActive("/about"),
+							"text-teal-500": isActive("/about"),
+						},
+					]}
+				>
 					<a href="/about" class="block">关于</a>
 				</div>
 
 				<div
-					class="absolute bottom-0 h-0.5 rounded-full bg-lime-600/70 opacity-80 transition-transform ease-out duration-300"
+					class="absolute inset-x-1 -bottom-px bg-gradient-to-r from-transparent via-teal-500/70 to-transparent h-px rounded-full opacity-80 transition-transform ease-out duration-300"
 					id="indicator"
 				>
 				</div>
@@ -156,8 +191,9 @@ const isActive = (href: string) => {
 		const x = e.clientX - rect.left;
 		const y = e.clientY - rect.top;
 		// background: linear-gradient(to right, lch(66% 0.19 249 / 0) 0%, lch(66% 0.19 249 / 0.7) 50%, lch(66% 0.19 249 / 0) 100%);
-		// radial-gradient(95.54894033949304px circle at 0px 0px, hsla(80,89%,89%,.6) 0%, transparent 65%)
-		tabContainer.style.background = `radial-gradient(95.54894033949304px circle at ${x}px ${y}px, hsla(80,89%,89%,.6) 0%, transparent 65%)`;
+		// radial-gradient(95px circle at 0px 0px, hsla(80,89%,89%,.6) 0%, transparent 65%)
+		// #33a6b8
+		tabContainer.style.background = `radial-gradient(155px circle at ${x}px ${y}px, rgba(51,166,184,0.12) 0%, transparent 65%)`;
 	});
 	tabContainer?.addEventListener("mouseleave", () => {
 		tabContainer.style.background = "none";

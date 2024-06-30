@@ -4,18 +4,21 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import AnimationBg from "../components/AnimationBg.astro";
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
 <html lang="zh">
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <ViewTransitions />
     </head>
 
     <body>
         <Header />
         <main
             class="flex max-w-3xl md:w-full p-4 items-start justify-center min-h-[calc(100vh_-_7rem)] pt-10"
+            transition:animate="none"
         >
             <slot />
         </main>

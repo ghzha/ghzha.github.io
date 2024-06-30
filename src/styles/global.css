@@ -162,33 +162,28 @@ code,
 kbd,
 samp,
 pre {
-	font-size: 0.9em;
+	font-size: 1em;
 }
 
 blockquote {
-	/* border-left: 5px solid #f87171; */
-	padding: 0.5rem 0.5rem;
+	padding: 0.5rem 1rem;
 	margin-bottom: 1rem;
 	font-size: 1em;
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 
-	border: 1px solid #B7F2F2;
+	border: 1px solid #fcd34d;
 	min-height: 4rem !important;
 	border-radius: 4px;
-	/* background-color: #ECFEFF; */
-	background: linear-gradient(#ECFEFF, #F5FFFF);
-	color: #0A95A5;
+	background: #fffbeb;
 }
 
 blockquote p {
 	margin: 0 !important;
-
-
 }
 
 blockquote a {
-	color: #0B7590 !important;
+	font-weight: bold;
 	text-decoration: none !important;
 }
 

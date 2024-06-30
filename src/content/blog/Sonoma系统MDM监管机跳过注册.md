@@ -9,6 +9,8 @@ tags:
   - JavaScript
 ---
 > 文章来源：[MacOS Sonoma MDM监管机跳过注册](https://www.bilibili.com/read/cv27632085/?spm_id_from=333.999.collection.opus.click)
+> 大多数方法利用human segmentation, body parts, color information 和 text phrase 等需要显式提取的信息促进局部匹配，可能引入噪声和不确定性，并引入额外的计算开销。因此，本文提出一种隐式的细粒度局部对齐方法，无需额外的监督和推理成本。具体而言，本文提出了Implicit Relation Reasoning (IRR) 模块，设计跨模态交互模块
+> 
 
 前言 距离上次的教程已经有几个月,sonoma的正式版也已经推送一段时间了.本次就更新一下mdm机器在14系统跳过注册的方法.
 之前的版本是12 激活时可以通过断网进桌面 然后使用屏蔽指令实现跳过
@@ -19,31 +21,16 @@ tags:
 
 将Mac关机 然后长按电源键 选择 恢复模式
 
-
-选择沙发浏览器 打开地址 [skipmdm.com](skipmdm.com)
-
+选择Safari浏览器 打开地址 [skipmdm.com](skipmdm.com)
 
 翻到中间 点击网页中的 Copy AutoByPass (即复制指令到粘贴板
-
 然后退出浏览器 ( 右上角退出 或使用command+Q
-
-
 
 回到下图的页面 点击实用工具打开终端
 
-
-
-
 按 command+v 将指令粘贴上去 并回车
 
-
-
-
-
 此时输入1 回车
-
-
-
 
 后面还需要填写三条信息
 
@@ -57,4 +44,3 @@ tags:
 
 做好这一切就可以愉快玩耍了 
 
-当然 信息填写错了 进入系统后再新增一个账户 也是可以的 

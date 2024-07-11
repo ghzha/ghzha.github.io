@@ -173,7 +173,7 @@ blockquote {
 	/* align-items: center; */
 
 	border: 1px solid #fcd34d;
-	min-height: 4rem !important;
+	/* min-height: 4rem !important; */
 	border-radius: 4px;
 	background: #fffbeb;
 }

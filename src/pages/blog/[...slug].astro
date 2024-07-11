@@ -18,36 +18,42 @@ const { Content } = await post.render();
 	<Content />
 </BlogPost>
 <script>
-	const copyButtonLabel = "Copy";
-	const copyCodeBlocks = document.querySelectorAll("pre");
-	copyCodeBlocks.forEach((codeBlock) => {
-		let wrapper = document.createElement("div");
-		wrapper.style.position = "relative";
+	document.addEventListener("astro:page-load", () => {
+		const copyButtonLabel = "Copy";
+		const copyCodeBlocks = document.querySelectorAll("pre");
+		console.log(copyCodeBlocks);
+		copyCodeBlocks.forEach((codeBlock) => {
+			let wrapper = document.createElement("div");
+			wrapper.style.position = "relative";
 
-		let copyButton = document.createElement("button");
-		copyButton.className = "copy-code";
-		copyButton.innerHTML = copyButtonLabel;
+			let copyButton = document.createElement("button");
+			copyButton.className = "copy-code";
+			copyButton.innerHTML = copyButtonLabel;
 
-		codeBlock.setAttribute("tabindex", "0");
-		codeBlock.appendChild(copyButton);
-		// wrap codebock with relative parent element
-		codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
-		wrapper.appendChild(codeBlock);
+			codeBlock.setAttribute("tabindex", "0");
+			codeBlock.appendChild(copyButton);
+			// wrap codebock with relative parent element
+			codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+			wrapper.appendChild(codeBlock);
 
-		copyButton.addEventListener("click", async () => {
-			await copyCode(codeBlock, copyButton);
+			copyButton.addEventListener("click", async () => {
+				await copyCode(codeBlock, copyButton);
+			});
 		});
+		async function copyCode(
+			block: HTMLPreElement,
+			button: HTMLButtonElement,
+		) {
+			const code = block.querySelector("code");
+			const text = code!.innerText;
+
+			await navigator.clipboard.writeText(text);
+
+			button.innerText = "Copied";
+
+			setTimeout(() => {
+				button.innerText = copyButtonLabel;
+			}, 700);
+		}
 	});
-	async function copyCode(block: HTMLPreElement, button: HTMLButtonElement) {
-		const code = block.querySelector("code");
-		const text = code!.innerText;
-
-		await navigator.clipboard.writeText(text);
-
-		button.innerText = "Copied";
-
-		setTimeout(() => {
-			button.innerText = copyButtonLabel;
-		}, 700);
-	}
 </script>

@@ -4,7 +4,50 @@ import TimeComponent from "../components/TimeComponent";
 ---
 
 <BaseLayout>
-	<div class="flex-col w-full items-center justify-center">
+	<div class="container flex-col w-full items-center justify-center">
 		<!-- <TimeComponent client:load /> -->
+		<div class="text-center">
+			<h1 class="intro-title font-medium"></h1>
+			<h2 class="intro-text font-light"></h2>
+		</div>
 	</div>
 </BaseLayout>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const titleText = "Hi, there!";
+		const introText = "I'm a front-end developer. Welcome to my blog!";
+		const introTitleElement = document.querySelector(
+			".intro-title",
+		) as HTMLElement;
+		const introTextElement = document.querySelector(
+			".intro-text",
+		) as HTMLElement;
+		let index = 0;
+
+		function typeText(
+			element: HTMLElement,
+			text: string,
+			callback?: () => void,
+		) {
+			if (index < text.length) {
+				element.textContent += text.charAt(index);
+				index++;
+				setTimeout(() => typeText(element, text, callback), 20); // 调整打字速度，100 毫秒每字符
+			} else {
+				index = 0;
+				if (callback) {
+					setTimeout(callback, 100); // 等待 500 毫秒再执行下一段打字
+				}
+			}
+		}
+
+		function startTyping() {
+			typeText(introTitleElement, titleText, () => {
+				typeText(introTextElement, introText);
+			});
+		}
+
+		startTyping();
+	});
+</script>

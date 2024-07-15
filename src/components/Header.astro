@@ -1,19 +1,19 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
+import HeaderLinks from "./HeaderLinks.astro";
 import { SITE_TITLE } from "../consts";
 
-import type { HTMLAttributes } from "astro/types";
+// import type { HTMLAttributes } from "astro/types";
 
 // type Props = HTMLAttributes<"a">;
 
 // const { href, class: className, ...props } = Astro.props;
 
-const { pathname } = Astro.url;
-const subpath = pathname.match(/[^\/]+/g);
+// const { pathname } = Astro.url;
+// const subpath = pathname.match(/[^\/]+/g);
 
-const isActive = (href: string) => {
-	return href === pathname || href === "/" + subpath?.[0];
-};
+// const isActive = (href: string) => {
+// 	return href === pathname || href === "/" + subpath?.[0];
+// };
 
 // = href === pathname || href === "/" + subpath?.[0];
 ---
@@ -23,7 +23,7 @@ const isActive = (href: string) => {
 	transition:persist
 >
 	<nav
-		class="container max-w-full mx-auto flex justify-between items-center font-medium text-base"
+		class="container relative max-w-full mx-auto flex justify-between items-center font-medium text-base"
 	>
 		<h2 class="text-2xl w-1/4 hidden md:block">
 			<a href="/">{SITE_TITLE}</a>
@@ -35,50 +35,7 @@ const isActive = (href: string) => {
 			<div
 				class="internal-links flex flex-row items-center gap-1 relative text-center"
 			>
-				<div
-					class:list={[
-						"tab",
-						"px-1",
-						{
-							active: isActive("/"),
-						},
-					]}
-				>
-					<a href="/" class="block">首页</a>
-				</div>
-				<div
-					class:list={[
-						"tab",
-						"px-1",
-						{
-							active: isActive("/blog"),
-						},
-					]}
-				>
-					<a href="/blog" class="block">博客</a>
-				</div>
-				<div
-					class:list={[
-						"tab",
-						"px-1",
-						{
-							active: isActive("/tags"),
-						},
-					]}
-				>
-					<a href="/tags" class="block">标签</a>
-				</div>
-				<div
-					class:list={[
-						"tab",
-						"px-1",
-						{
-							active: isActive("/about"),
-						},
-					]}
-				>
-					<a href="/about" class="block">关于</a>
-				</div>
+				<HeaderLinks />
 
 				<div
 					class="absolute -bottom-px bg-gradient-to-r from-transparent via-teal-500/70 to-transparent h-px rounded-full opacity-80"
@@ -90,12 +47,9 @@ const isActive = (href: string) => {
 		<!-- 响应式菜单 -->
 		<div
 			id="responsive-menu"
-			class="md:hidden z-20 absolute top-16 right-0 flex flex-col items-center gap-4 bg-white p-2 transition-transform origin-center"
+			class="md:hidden box-border px-2 overflow-hidden z-20 h-0 absolute top-8 opacity-90 -right-5 flex flex-col items-center gap-4 bg-white transition-all duration-300"
 		>
-			<HeaderLink href="/">首页</HeaderLink>
-			<HeaderLink href="/blog">博客</HeaderLink>
-			<HeaderLink href="/tags">标签</HeaderLink>
-			<HeaderLink href="/about">关于</HeaderLink>
+			<HeaderLinks />
 		</div>
 
 		<div class="hidden md:flex w-1/4 justify-end">
@@ -158,10 +112,26 @@ const isActive = (href: string) => {
 	// responsive menu
 	const menuToggle = document.getElementById("menu-toggle");
 	const responsiveMenu = document.getElementById("responsive-menu");
+
+	let expanded = false;
 	if (menuToggle && responsiveMenu) {
-		responsiveMenu.classList.add("hidden");
 		menuToggle.addEventListener("click", () => {
-			responsiveMenu.classList.toggle("hidden");
+			if (expanded) {
+				responsiveMenu.style.height = "0";
+			} else {
+				responsiveMenu.classList.toggle("h-0");
+
+				responsiveMenu.style.height = "auto";
+				const { height } = responsiveMenu.getBoundingClientRect();
+				responsiveMenu.style.height = "0";
+				responsiveMenu.getBoundingClientRect();
+				responsiveMenu.style.height = `${height}px`;
+			}
+
+			expanded = !expanded;
+		});
+		responsiveMenu.addEventListener("click", () => {
+			menuToggle.click();
 		});
 	}
 	// Tab indicator

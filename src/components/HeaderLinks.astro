@@ -1,0 +1,66 @@
+---
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
+
+const isActive = (href: string) => {
+	return href === pathname || href === "/" + subpath?.[0];
+};
+---
+
+<div
+	class:list={[
+		"tab",
+		"px-1",
+		{
+			active: isActive("/"),
+		},
+	]}
+>
+	<a href="/" class="block">首页</a>
+</div>
+<div
+	class:list={[
+		"tab",
+		"px-1",
+		{
+			active: isActive("/blog"),
+		},
+	]}
+>
+	<a href="/blog" class="block">博客</a>
+</div>
+<div
+	class:list={[
+		"tab",
+		"px-1",
+		{
+			active: isActive("/tags"),
+		},
+	]}
+>
+	<a href="/tags" class="block">标签</a>
+</div>
+<div
+	class:list={[
+		"tab",
+		"px-1",
+		{
+			active: isActive("/about"),
+		},
+	]}
+>
+	<a href="/about" class="block">关于</a>
+</div>
+
+<style>
+	a {
+		padding: 0.5rem 0.5rem;
+		color: var(--black);
+		text-decoration: none;
+		display: inline-block;
+	}
+	.active a {
+		font-weight: bolder;
+		color: #14b8a6;
+	}
+</style>
